@@ -4,6 +4,16 @@ using Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "Sessions";
+    options.IdleTimeout = TimeSpan.FromMinutes(5); // Adjust the timeout as needed
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddRepositoryServices(builder.Configuration);
@@ -17,6 +27,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionMiddleware>();

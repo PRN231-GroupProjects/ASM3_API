@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Annotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
@@ -22,7 +23,8 @@ namespace API.Controllers
         {
             _service = service;
         }
-
+        
+        
         [HttpGet]
         public async Task<ActionResult<Result<PaginatedList<ProductDto>>>> GetProducts([FromQuery]GetProductsRequest request)
         {
@@ -38,6 +40,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Role(Role = 1)]
         public async Task<ActionResult<Result<ProductDto>>> CreateProduct([FromBody]CreateProductRequest request)
         {
             var product = await _service.CreateProduct(request);
@@ -45,6 +48,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Role(Role = 1)]
         public async Task<ActionResult<Result<ProductDto>>> UpdateProduct([FromBody] UpdateProductRequest request, [FromRoute] int id)
         {
             var product = await _service.UpdateProduct(id, request);
@@ -52,6 +56,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Role(Role = 1)]
         public async Task<ActionResult<Result<ProductDto>>> DeleteProduct([FromRoute] int id)
         {
             var product = await _service.DeleteProduct(id);

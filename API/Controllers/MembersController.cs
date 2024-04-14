@@ -1,3 +1,4 @@
+using API.Annotations;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
 using Service.Models;
@@ -52,4 +53,23 @@ public class MembersController : ControllerBase
         var product = await _service.DeleteMember(id);
         return Ok(Result<MemberDto>.Succeed(product));
     }
+
+    [HttpPost("/login")]
+    public async Task<ActionResult<Result<MemberDto>>> LoginMember([FromBody] LoginRequest request)
+    {
+        var member = await _service.Login(request);
+        
+        HttpContext.Session.SetInt32("role", member.Role);
+        
+        return Ok(Result<MemberDto>.Succeed(member));
+    }
+    
+    [HttpPost("/logout")]
+        public async Task<ActionResult<Result<Boolean>>> LogoutMember()
+        {
+            
+            HttpContext.Session.Clear();
+            
+            return Ok(Result<Boolean>.Succeed(true));
+        }
 }
