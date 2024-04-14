@@ -63,4 +63,13 @@ public class MembersController : ControllerBase
         
         return Ok(Result<MemberDto>.Succeed(member));
     }
+    
+    [HttpPost("/logout")]
+        public async Task<ActionResult<Result<Boolean>>> LogoutMember()
+        {
+            
+            HttpContext.Session.Clear();
+            
+            return Ok(Result<Boolean>.Succeed(true));
+        }
 }
