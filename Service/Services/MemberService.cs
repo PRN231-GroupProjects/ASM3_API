@@ -111,4 +111,17 @@ public class MemberService : IMemberService
         await _uow.CommitAsync();
         return _mapper.Map<MemberDto>(result);
     }
+
+    public async Task<MemberDto> Login(LoginRequest request)
+    {
+        var member = await _memberRepository.FindByCondition(x => x.Email == request.Email && x.Password == request.Password)
+            .FirstOrDefaultAsync();
+
+        if (member is null)
+        {
+            throw new KeyNotFoundException("Invalid account!"); 
+        }
+
+        return _mapper.Map<MemberDto>(member);
+    }
 }

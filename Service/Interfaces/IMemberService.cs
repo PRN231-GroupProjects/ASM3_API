@@ -11,4 +11,5 @@ public interface IMemberService
     Task<MemberDto> CreateMember(CreateMemberRequest request);
     Task<MemberDto> UpdateMember(int id, UpdateMemberRequest request);
     Task<MemberDto> DeleteMember(int id);
+    Task<MemberDto> Login(LoginRequest request);
 }

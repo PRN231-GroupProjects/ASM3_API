@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Annotations;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
@@ -38,6 +39,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Role(Role = 1)]
         public async Task<ActionResult<Result<OrderDto>>> CreateMember([FromBody]CreateOrderRequest request)
         {
             var product = await _service.CreateOrder(request);
@@ -45,6 +47,7 @@ namespace API.Controllers
         }
 
         [HttpPut("{id:int}")]
+        [Role(Role = 1)]
         public async Task<ActionResult<Result<OrderDto>>> UpdateMember([FromBody] UpdateOrderRequest request, [FromRoute] int id)
         {
             var product = await _service.UpdateOrder(id, request);
@@ -52,6 +55,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id:int}")]
+        [Role(Role = 1)]
         public async Task<ActionResult<Result<OrderDto>>> DeleteMember([FromRoute] int id)
         {
             var product = await _service.DeleteOrder(id);
