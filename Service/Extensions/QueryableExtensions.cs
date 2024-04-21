@@ -3,7 +3,7 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Service.Common.Mapping;
 using Service.Models;
-using Service.Models.Dtos;
+using Service.Models.Models;
 
 namespace Service.Extensions;
 
@@ -22,11 +22,11 @@ public static class QueryableExtensions
         string? sortOrder,
         IConfigurationProvider mapperConfiguration
        )
-        where TEntityDto : BaseDto, IMapFrom<TEntity>
+        where TEntityDto : BaseModel, IMapFrom<TEntity>
     {
         if (sortBy is null || !sortBy.MatchesPropertyName<TEntityDto>())
         {
-            sortBy = nameof(BaseDto.Id);
+            sortBy = nameof(BaseModel.Id);
         }
             
         sortOrder ??= "asc";

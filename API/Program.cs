@@ -1,4 +1,7 @@
+using System.Text.Json.Serialization;
 using API.Middlewares;
+using API.Policies;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Repository;
 using Service;
 
@@ -6,15 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDistributedMemoryCache();
 
-builder.Services.AddSession(options =>
-{
-    options.Cookie.Name = "Sessions";
-    options.IdleTimeout = TimeSpan.FromMinutes(5); // Adjust the timeout as needed
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
-
-builder.Services.AddControllers();
+builder.Services.AddControllers(opt => opt.Conventions.Add(new RouteTokenTransformerConvention(new SlugifyParameterTransformer()))).AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddRepositoryServices(builder.Configuration);
 builder.Services.AddApplicationServices();
@@ -27,7 +22,6 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseSession();
 
 app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionMiddleware>();

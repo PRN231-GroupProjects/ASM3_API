@@ -12,11 +12,12 @@ public class ApplicationDbContext : DbContext
         
     }
 
-    public DbSet<Category>? Categories { get; set; }
-    public DbSet<Member>? Members { get; set; }
-    public DbSet<Product>? Products { get; set; }
-    public DbSet<Order>? Orders { get; set; }
-    public DbSet<OrderDetail>? OrderDetails { get; set; }
+    public DbSet<Author>? Authors { get; set; }
+    public DbSet<Book>? Books { get; set; }
+    public DbSet<BookAuthor>? BookAuthors { get; set; }
+    public DbSet<Publisher>? Publishers { get; set; }
+    public DbSet<Role>? Roles { get; set; }
+    public DbSet<User>? Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -32,6 +32,4 @@ public class UnitOfWork : IUnitOfWork
             _dbContext.Dispose();
         }
     }
-
-   
 }
