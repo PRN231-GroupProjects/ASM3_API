@@ -7,9 +7,9 @@ namespace Service.Interfaces;
 
 public interface IPublisherService
 {
-    Task<PaginatedList<PublisherModel>> GetPublishers(GetPublisherRequest request);
-    Task<PublisherModel> GetPublisherById(int id);
-    Task<PublisherModel> CreatePublisher(CreatePublisherRequest request);
-    Task<PublisherModel> UpdatePublisher(int id, UpdatePublisherRequest request);
-    Task<PublisherModel> DeletePublisher(int id);
+    Task<PaginatedList<ProductModel>> GetPublishers(GetPublisherRequest request);
+    Task<ProductModel> GetPublisherById(int id);
+    Task<ProductModel> CreatePublisher(CreatePublisherRequest request);
+    Task<ProductModel> UpdatePublisher(int id, UpdatePublisherRequest request);
+    Task<ProductModel> DeletePublisher(int id);
 }

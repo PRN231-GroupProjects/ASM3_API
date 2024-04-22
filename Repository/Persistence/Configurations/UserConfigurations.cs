@@ -11,19 +11,15 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-        builder.HasOne(x => x.Publisher)
-            .WithMany(x => x.Users)
+        builder.HasMany(x => x.Orders)
+            .WithOne(x => x.User)
             .IsRequired()
-            .HasForeignKey("PublisherId");
-
-        builder.HasOne(x => x.Role).WithMany(x => x.Users).IsRequired().HasForeignKey("RoleId");
-
+            .HasForeignKey("MemberId");
+        
         builder.Property(x => x.Email).IsRequired();
         builder.Property(x => x.Password).IsRequired();
         builder.Property(x => x.Source).IsRequired();
         builder.Property(x => x.FirstName).IsRequired();
-        builder.Property(x => x.LastName).IsRequired();
-        builder.Property(x => x.MiddleName).IsRequired();
-        builder.Property(x => x.HiredDate).IsRequired();
+        builder.Property(x => x.LastName).IsRequired();        
     }
 }

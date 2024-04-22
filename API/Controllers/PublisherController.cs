@@ -24,38 +24,38 @@ namespace API.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<Result<PaginatedList<PublisherModel>>>> GetAuthors([FromQuery] GetPublisherRequest request)
+        public async Task<ActionResult<Result<PaginatedList<ProductModel>>>> GetAuthors([FromQuery] GetPublisherRequest request)
         {
             var publishers = await _service.GetPublishers(request);
-            return Ok(Result<PaginatedList<PublisherModel>>.Succeed(publishers));
+            return Ok(Result<PaginatedList<ProductModel>>.Succeed(publishers));
         }
         
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Result<PublisherModel>>> GetAuthorById([FromRoute]int id)
+        public async Task<ActionResult<Result<ProductModel>>> GetAuthorById([FromRoute]int id)
         {
             var publisher = await _service.GetPublisherById(id);
-            return Ok(Result<PublisherModel>.Succeed(publisher));
+            return Ok(Result<ProductModel>.Succeed(publisher));
         }
 
         [HttpPost]
-        public async Task<ActionResult<Result<PublisherModel>>> CreateMember([FromBody]CreatePublisherRequest request)
+        public async Task<ActionResult<Result<ProductModel>>> CreateMember([FromBody]CreatePublisherRequest request)
         {
             var publisher = await _service.CreatePublisher(request);
-            return Ok(Result<PublisherModel>.Succeed(publisher));
+            return Ok(Result<ProductModel>.Succeed(publisher));
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Result<PublisherModel>>> UpdateMember([FromBody] UpdatePublisherRequest request, [FromRoute] int id)
+        public async Task<ActionResult<Result<ProductModel>>> UpdateMember([FromBody] UpdatePublisherRequest request, [FromRoute] int id)
         {
             var publisher = await _service.UpdatePublisher(id, request);
-            return Ok(Result<PublisherModel>.Succeed(publisher));
+            return Ok(Result<ProductModel>.Succeed(publisher));
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<Result<PublisherModel>>> DeleteMember([FromRoute] int id)
+        public async Task<ActionResult<Result<ProductModel>>> DeleteMember([FromRoute] int id)
         {
             var publisher = await _service.DeletePublisher(id);
-            return Ok(Result<PublisherModel>.Succeed(publisher));
+            return Ok(Result<ProductModel>.Succeed(publisher));
         }
     }
 }

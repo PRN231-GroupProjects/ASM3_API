@@ -24,38 +24,38 @@ namespace API.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<Result<PaginatedList<BookModel>>>> GetAuthors([FromQuery] GetBooksRequest request)
+        public async Task<ActionResult<Result<PaginatedList<OrderDetailModel>>>> GetAuthors([FromQuery] GetBooksRequest request)
         {
             var books = await _service.GetBooks(request);
-            return Ok(Result<PaginatedList<BookModel>>.Succeed(books));
+            return Ok(Result<PaginatedList<OrderDetailModel>>.Succeed(books));
         }
         
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Result<BookModel>>> GetAuthorById([FromRoute]int id)
+        public async Task<ActionResult<Result<OrderDetailModel>>> GetAuthorById([FromRoute]int id)
         {
             var book = await _service.GetBookById(id);
-            return Ok(Result<BookModel>.Succeed(book));
+            return Ok(Result<OrderDetailModel>.Succeed(book));
         }
 
         [HttpPost]
-        public async Task<ActionResult<Result<BookModel>>> CreateMember([FromBody]CreateBookRequest request)
+        public async Task<ActionResult<Result<OrderDetailModel>>> CreateMember([FromBody]CreateBookRequest request)
         {
             var book = await _service.CreateBook(request);
-            return Ok(Result<BookModel>.Succeed(book));
+            return Ok(Result<OrderDetailModel>.Succeed(book));
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult<Result<BookModel>>> UpdateMember([FromBody] UpdateBookRequest request, [FromRoute] int id)
+        public async Task<ActionResult<Result<OrderDetailModel>>> UpdateMember([FromBody] UpdateBookRequest request, [FromRoute] int id)
         {
             var book = await _service.UpdateBook(id, request);
-            return Ok(Result<BookModel>.Succeed(book));
+            return Ok(Result<OrderDetailModel>.Succeed(book));
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult<Result<BookModel>>> DeleteMember([FromRoute] int id)
+        public async Task<ActionResult<Result<OrderDetailModel>>> DeleteMember([FromRoute] int id)
         {
             var book = await _service.DeleteBook(id);
-            return Ok(Result<BookModel>.Succeed(book));
+            return Ok(Result<OrderDetailModel>.Succeed(book));
         }
     }
 }

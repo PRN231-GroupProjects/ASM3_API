@@ -2,7 +2,11 @@ using System.Text.Json.Serialization;
 using API.Middlewares;
 using API.Policies;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 using Repository;
+using Repository.Entities;
+using Repository.Persistence;
 using Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +19,8 @@ builder.Services.AddRepositoryServices(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddScoped<ExceptionMiddleware>();
 builder.Services.AddSwaggerGen();
+builder.Services.AddIdentityCore<User>()
+      .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(CORSPolicy.Development, builder =>
